@@ -1,11 +1,12 @@
 class Helper {
   static baseURL() {
-    return "https://api.yelp.com/v3";
+    return "https://api.foursquare.com/v2";
   }
   static auth() {
     const keys = {
-      // client_id: 'ne463RiSqUtiyUo45EVQzQ',
-      Authorization: 'Bearer aBSyWhjqG-LjIJbCN2l-IbC_5lIizT6TVuyzBANqCH8tGgDGTnyo_P8WgVDXcXPE6bxiEyHNk12wKVSD8wG4hSJ2SgU8Ho1P0MXpuFktpCYczXqCtak-ERuisSG9W3Yx'
+      client_id: 'E22IMWWHGOPZNXEYXHLXUKSQMIVTBSEJXAAYPKWCOUFKHJJY',
+      client_secret: 'GX5BKLN0HOVEE5I55UXFTBSW0GUCBJPUFIZTPAXEPX3JYTJK',
+      v: '20181010'
     };
     return Object.keys(keys)
       .map(key => `${key}=${keys[key]}`)
@@ -21,28 +22,30 @@ class Helper {
   }
   static headers() {
     return {
-      Accept: "application/json"
+      Accept: "application/json",
+      headers: Helper.headers()
     };
   }
   static simpleFetch(endPoint, method, urlParams) {
     let requestData = {
-      method,
-      headers: Helper.headers(),
-      mode: "no-cors" // no-cors
+      method
     };
-    return fetch(`${Helper.baseURL()}${endPoint}?${Helper.urlBuilder(
+    return fetch(`${Helper.baseURL()}${endPoint}?${Helper.auth()}&${Helper.urlBuilder(
       urlParams
     )}`,
     requestData
-  );
+  ).then(response => response.json());
   }
 }
 
-export default class YelpAPI {
+export default class FoursquareAPI {
   static search(urlParams) {
-    return Helper.simpleFetch("/businesses/search", "GET", urlParams);
+    return Helper.simpleFetch("/venues/search", "GET", urlParams);
   }
-  static getVenueDetails(id) {
-    return Helper.simpleFetch(`/businesses/${id}`, "GET");
+  static getVenueDetails(VENUE_ID) {
+    return Helper.simpleFetch(`/venues/${VENUE_ID}`, "GET");
+  }
+  static getVenuePhotos(VENUE_ID) {
+    return Helper.simpleFetch(`/venues/${VENUE_ID}/photos`, "GET");
   }
 }

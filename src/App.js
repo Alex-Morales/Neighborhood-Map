@@ -40,8 +40,10 @@ class App extends Component {
   componentDidMount() {
     FoursquareAPI.search({
       near: "Folsom,CA",
-      query: "coffee",
-      limit: 10
+      // query: "coffee",
+      intent: "browse",
+      categoryId: "4bf58dd8d48988d1e0931735",
+      // limit: 10
     }).then(results => {
         const { venues } = results.response;
         const { center } = results.response.geocode.feature.geometry;

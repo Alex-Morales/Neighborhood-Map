@@ -15,20 +15,28 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "reac
       {props.markers &&
         props.markers
           .filter(marker => marker.isVisible)
-          .map((marker,idx) => (
-            <Marker
+          .map((marker,idx) => {
+            const venueInfo = props.venues.find(venue => venue.id===marker.id);
+            return <Marker
             key={idx}
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => props.handleMarkerClick(marker)}
             >
-              {marker.isOpen && <InfoWindow>
-                <div>
-                  <p>{ marker.name }</p>
-                  <p>{ marker.address }</p>
-                </div>
-              </InfoWindow>}
+              {marker.isOpen &&
+                venueInfo.bestPhoto && (
+                  <InfoWindow>
+                <>
+                  <img
+                    src={`${venueInfo.bestPhoto.prefix}100x100${venueInfo.bestPhoto.suffix}`}
+                    alt={`${venueInfo.name}`}
+                  />
+                  <p>{ venueInfo.name }</p>
+                  <p>{ venueInfo.location.address }</p>
+                </>
+              </InfoWindow>
+            )}
             </Marker>
-            ))
+          })
       }
     </GoogleMap>
   ))

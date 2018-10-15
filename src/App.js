@@ -28,12 +28,19 @@ class App extends Component {
     this.closeMarkers();
     marker.isOpen = true;
     this.setState({markers: Object.assign(this.state.markers, marker)})
+    const venue = this.state.venues.find(venue => venue.id === marker.id);
+    FoursquareAPI.getVenueDetails(marker.id)
+      .then(response => {
+          const newVenue = Object.assign(venue, response.response.venue);
+          this.setState({ venues: Object.assign(this.state.venues, newVenue) });
+          console.log(newVenue)
+        });
   }
 
   componentDidMount() {
     FoursquareAPI.search({
       near: "Folsom,CA",
-      query: "tacos",
+      query: "coffee",
       limit: 10
     }).then(results => {
         const { venues } = results.response;
@@ -45,7 +52,7 @@ class App extends Component {
             isOpen:false,
             isVisible:true,
             name: venue.name,
-            address: venue.location.formattedAddress,
+            id: venue.id,
           };
         });
         this.setState({ venues, center, markers });

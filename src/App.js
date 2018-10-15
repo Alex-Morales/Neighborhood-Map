@@ -11,9 +11,25 @@ class App extends Component {
       venues: [],
       center: [],
       markers: [],
+      name: [],
+      address: [],
       zoom: 12
     };
   }
+  closeMarkers = () =>  {
+    const markers = this.state.markers.map(marker => {
+      marker.isOpen = false;
+      return marker;
+    })
+    this.setState({markers: Object.assign(this.state.markers, markers)})
+  }
+
+  handleMarkerClick = (marker) => {
+    this.closeMarkers();
+    marker.isOpen = true;
+    this.setState({markers: Object.assign(this.state.markers, marker)})
+  }
+
   componentDidMount() {
     FoursquareAPI.search({
       near: "Folsom,CA",
@@ -28,6 +44,8 @@ class App extends Component {
             lng: venue.location.lng,
             isOpen:false,
             isVisible:true,
+            name: venue.name,
+            address: venue.location.formattedAddress,
           };
         });
         this.setState({ venues, center, markers });
@@ -38,7 +56,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Map {...this.state} />
+        <Map {...this.state}
+        handleMarkerClick={this.handleMarkerClick}
+        />
       </div>
     );
   }

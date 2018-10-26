@@ -7,12 +7,35 @@ export default class SideBar extends Component {
     super(props)
     //DON'T CALL this.setState() here!
     this.state = {
-      query: ''
+      query: '',
+      venues: [],
     }
   }
-  handleFilterVenues = () => {
+  hideSbux = () => {
+    const checkbox=document.getElementById('myCheck')
+    if(checkbox.checked === true) {
+      console.log("CHECKED!");
+      const venues = this.props.venues.filter(venue => !venue.name.includes('Starbucks'));
+      console.log(venues);
+      return venues;
+    }
+    if(checkbox.checked === false){
+      console.log("NOT CHECKED, DO NOTHING!");
+      console.log(this.props.venues);
+      return this.props.venues;
+    }
+  };
 
-  }
+  handleFilterVenues = () => {
+    if(this.state.query.trim() !== '') {
+      const venues = this.props.venues.filter(venue =>  venue.name
+        .toLowerCase()
+        .includes(this.state.query.toLowerCase()))
+        return venues;
+    }
+    return this.props.venues;
+  };
+
   inputChange = (event) => {
     const query = event.target.value;
     this.setState({query});
@@ -40,7 +63,16 @@ export default class SideBar extends Component {
           placeholder={"Filter venues"}
           onChange={this.inputChange}
         />
+
+          Click to hide ALL Starbucks
+          <input
+            type={"checkbox"}
+            id={"myCheck"}
+            onClick={this.hideSbux}
+          />
+
         <VenueList {...this.props}
+        venues = {this.handleFilterVenues()}
         handleListItemClick={this.props.handleListItemClick}
         />
       </div>

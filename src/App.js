@@ -56,8 +56,6 @@ class App extends Component {
       intent: "browse",
       categoryId: "4bf58dd8d48988d1e0931735",
       // limit: 10
-      // i want to use .filter(results => {
-      //   return results.venues.name !== "Starbucks"})
     }).then(results => {
         const { venues } = results.response;
         const { center } = results.response.geocode.feature.geometry;

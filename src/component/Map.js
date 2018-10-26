@@ -16,13 +16,13 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "reac
       {props.markers &&
         props.markers
           .filter(marker => marker.isVisible)
-          .map((marker,idx) => {
+          .map((marker,idx, arr) => {
             const venueInfo = props.venues.find(venue => venue.id===marker.id);
             return <Marker
             key={idx}
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => props.handleMarkerClick(marker)}
-            animation={google.maps.Animation.DROP} //If only one, change this to BOUNCE.
+            animation={arr.length === 1 ? google.maps.Animation.BOUNCE : google.maps.Animation.DROP} //If only one, change this to BOUNCE.
             >
               {marker.isOpen &&
                 venueInfo.bestPhoto && (

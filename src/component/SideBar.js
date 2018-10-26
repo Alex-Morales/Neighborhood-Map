@@ -17,6 +17,7 @@ export default class SideBar extends Component {
       console.log("CHECKED!");
       const venues = this.props.venues.filter(venue => !venue.name.includes('Starbucks'));
       console.log(venues);
+      this.props.updateSuperState({venues})
       return venues;
     }
     if(checkbox.checked === false){

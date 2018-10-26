@@ -16,6 +16,7 @@ class App extends Component {
       name: [],
       address: [],
       zoom: 12,
+      noSbux: [],
       updateSuperState: obj => {
         this.setState(obj);
       }

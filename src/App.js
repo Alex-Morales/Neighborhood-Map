@@ -1,3 +1,4 @@
+/* global google */
 import React, { Component } from 'react';
 import './App.css';
 import Map from "./component/Map"
@@ -14,7 +15,10 @@ class App extends Component {
       markers: [],
       name: [],
       address: [],
-      zoom: 12
+      zoom: 12,
+      updateSuperState: obj => {
+        this.setState(obj);
+      }
     };
   }
   closeMarkers = () =>  {
@@ -35,6 +39,8 @@ class App extends Component {
           const newVenue = Object.assign(venue, response.response.venue);
           this.setState({ venues: Object.assign(this.state.venues, newVenue) });
         });
+        marker.animation=google.maps.Animation.BOUNCE;
+
   }
 
   handleListItemClick = venue => {

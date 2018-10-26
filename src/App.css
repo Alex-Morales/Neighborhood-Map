@@ -4,15 +4,34 @@
   width: 100vw;
   display: flex;
   flex-flow: row nowrap;
+
 }
 .sideBar {
   width: 25%;
+  overflow: auto;
+}
+#search {
+  width: 100%;
+  font-size: 1rem;
+  height: 2rem;
+
 }
 .venueList {
-  list-style: none;
-  background: cadetblue
+    padding: 1rem;
+    margin-top: 0;
 }
-
+.listItem {
+    list-style: none;
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    background: #00704a;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;

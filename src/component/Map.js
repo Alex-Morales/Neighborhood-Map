@@ -22,8 +22,10 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "reac
             key={idx}
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => props.handleMarkerClick(marker)}
-            animation={arr.length === 1 ? google.maps.Animation.BOUNCE : google.maps.Animation.DROP} //If only one, change this to BOUNCE.
+            animation={arr.length === 1 ? google.maps.Animation.BOUNCE : google.maps.Animation.DROP}
+            isOpen={arr.length === 1 ? true : false}
             >
+
               {marker.isOpen &&
                 venueInfo.bestPhoto && (
                   <InfoWindow>

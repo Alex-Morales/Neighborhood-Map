@@ -5,6 +5,8 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "reac
   const MyMapComponent = withScriptjs(
     withGoogleMap(props => (
     <GoogleMap
+      role="application"
+      aria-label="map"
       defaultZoom={8}
       zoom={props.zoom}
       defaultCenter={{ lat: -34.397, lng: 150.644 }}

@@ -74,7 +74,7 @@ export default class SideBar extends Component {
             onClick={this.hideSbux}
             aria-label="Hide starbucks checkbox"
           />
-        </form>
+      </form>
 
         <VenueList {...this.props}
         venues = {this.handleFilterVenues()}

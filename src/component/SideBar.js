@@ -58,11 +58,13 @@ export default class SideBar extends Component {
   render() {
     return (
       <div className="sideBar">
+      <form role="search">
         <input
           type={"search"}
           id={"search"}
           placeholder={"Filter venues"}
           onChange={this.inputChange}
+          aria-label="Filter venues search bar"
         />
 
           Click to hide ALL Starbucks
@@ -70,7 +72,9 @@ export default class SideBar extends Component {
             type={"checkbox"}
             id={"myCheck"}
             onClick={this.hideSbux}
+            aria-label="Hide starbucks checkbox"
           />
+        </form>
 
         <VenueList {...this.props}
         venues = {this.handleFilterVenues()}

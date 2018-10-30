@@ -76,13 +76,20 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
+      <div>
+        <header>
+          <nav>
+            <h1><a href="/" aria-label="Home">Coffee shops in Folsom, CA</a></h1>
+          </nav>
+        </header>
+        <main className="App">
         <SideBar {...this.state}
         handleListItemClick={this.handleListItemClick}
         />
         <Map {...this.state}
         handleMarkerClick={this.handleMarkerClick}
         />
+        </main>
       </div>
     );
   }

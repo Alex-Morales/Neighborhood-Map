@@ -86,10 +86,10 @@ class App extends Component {
           <SideBar {...this.state}
           handleListItemClick={this.handleListItemClick}
           />
-            <Map {...this.state}
-            handleMarkerClick={this.handleMarkerClick}
-            id="map"
-            />
+          <Map {...this.state}
+          handleMarkerClick={this.handleMarkerClick}
+          id="map"
+          />
         </main>
       </div>
     );

@@ -50,12 +50,34 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "reac
 );
 
   export default class Map extends Component {
+    state = {
+        show: false,
+        timeout: null
+    }
+    showMessage = () => {
+        this.setState({show: true});
+    }
+    componentDidMount = () => {
+        let timeout = window.setTimeout(this.showMessage, 1000);
+        this.setState({timeout});
+    }
+    componentWillUnmount = () => {
+        window.clearTimeout(this.state.timeout);
+    }
     render() {
       return (
         <MyMapComponent
         {...this.props}
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDuDk-Kii8G-EwKiU54qniCYki40kqVndA"
-        loadingElement={<div style={{ height: `100%` }} />}
+        loadingElement={<div>
+          {this.state.show
+            ?
+            (<div>
+                <h1>Error loading map</h1>
+                <p>Network error. Check internet connection.</p>
+            </div>):(<div><h1>Loading...</h1></div>)
+          }
+        </div>}
         containerElement={<div style={{ height: `100%`, width: `75%` }} />}
         mapElement={<div style={{ height: `100%` }} />}
       />

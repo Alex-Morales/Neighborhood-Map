@@ -79,7 +79,7 @@ class App extends Component {
       <div>
         <header>
           <nav>
-            <h1><a href="/" aria-label="Home">Coffee shops in Folsom, CA</a></h1>
+            <h1 aria-label="Home">Coffee shops in Folsom, CA</h1>
           </nav>
         </header>
         <main className="App">

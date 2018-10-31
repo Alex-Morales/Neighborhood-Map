@@ -58,7 +58,7 @@ export default class SideBar extends Component {
   render() {
     return (
       <div className="sideBar">
-      <form role="search">
+      <form role="search" className="form">
         <input
           type={"search"}
           id={"search"}
@@ -66,7 +66,7 @@ export default class SideBar extends Component {
           onChange={this.inputChange}
           aria-label="Filter venues search bar"
         />
-
+        
           Click to hide ALL Starbucks
           <input
             type={"checkbox"}

@@ -26,6 +26,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "reac
             onClick={() => props.handleMarkerClick(marker)}
             animation={arr.length === 1 ? google.maps.Animation.BOUNCE : google.maps.Animation.DROP}
             isOpen={arr.length === 1 ? true : false}
+            tabIndex="0"
             >
 
               {marker.isOpen &&

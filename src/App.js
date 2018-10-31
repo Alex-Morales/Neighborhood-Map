@@ -83,12 +83,13 @@ class App extends Component {
           </nav>
         </header>
         <main className="App">
-        <SideBar {...this.state}
-        handleListItemClick={this.handleListItemClick}
-        />
-        <Map {...this.state}
-        handleMarkerClick={this.handleMarkerClick}
-        />
+          <SideBar {...this.state}
+          handleListItemClick={this.handleListItemClick}
+          />
+            <Map {...this.state}
+            handleMarkerClick={this.handleMarkerClick}
+            id="map"
+            />
         </main>
       </div>
     );

@@ -29,11 +29,11 @@ nav h1 a {
   display: flex;
   flex-flow: row nowrap;
 
-  background-color: #f3f3f3;
+  /* background-color: #f3f3f3;
   min-height: 100%;
-	/* display: flex; */
-	/* flex-direction: column; */
-	width: 100%;
+	display: flex;
+	flex-direction: column;
+	width: 100%; */
 }
 .sideBar {
   width: 25%;
@@ -62,7 +62,11 @@ nav h1 a {
     display: flex;
     align-items: center;
 }
-
+#map {
+  height: 400px;
+  width: 100%;
+  background-color: #ccc;
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;

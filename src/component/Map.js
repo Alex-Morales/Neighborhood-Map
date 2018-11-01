@@ -68,6 +68,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "reac
       return (
         <MyMapComponent
         {...this.props}
+        className="map"
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDuDk-Kii8G-EwKiU54qniCYki40kqVndA"
         loadingElement={<div>
           {this.state.show

@@ -88,7 +88,6 @@ class App extends Component {
           />
           <Map {...this.state}
           handleMarkerClick={this.handleMarkerClick}
-          id="map"
           />
         </main>
       </div>

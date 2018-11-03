@@ -62,14 +62,7 @@ nav h1 {
     display: flex;
     align-items: center;
 }
-/* ====================== Map ====================== */
-/* #map {
-  height: 400px;
+/* ====================== Map Area ====================== */
+.mapContainer {
   width: 100%;
-  background-color: #ccc;
-} */
-@media screen and (max-width: 799px) {
-nav h1 {
-		letter-spacing: 5px;
-	}
 }

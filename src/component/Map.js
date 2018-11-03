@@ -50,38 +50,48 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "reac
 );
 
   export default class Map extends Component {
-    state = {
-        show: false,
-        timeout: null
+    constructor() {
+    super();
+    this.state = {
+      error: false
+    };
     }
-    showMessage = () => {
-        this.setState({show: true});
-    }
+
     componentDidMount = () => {
-        let timeout = window.setTimeout(this.showMessage, 1000);
-        this.setState({timeout});
+      window.gm_authFailure = () => {
+        this.setState({ error: true });
+      };
     }
-    componentWillUnmount = () => {
-        window.clearTimeout(this.state.timeout);
-    }
+
     render() {
       return (
-        <MyMapComponent
-        {...this.props}
-        className="map"
-        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDuDk-Kii8G-EwKiU54qniCYki40kqVndA"
-        loadingElement={<div>
-          {this.state.show
-            ?
-            (<div>
-                <h1>Error loading map</h1>
-                <p>Network error. Check internet connection.</p>
-            </div>):(<div><h1>Loading...</h1></div>)
-          }
-        </div>}
-        containerElement={<div style={{ height: `100%`, width: `75%` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-      />
+        <div className="mapContainer">
+          {!this.state.error && (
+          <MyMapComponent
+          {...this.props}
+          className="map"
+          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDuDk-Kii8G-EwKiU54qniCYki40kqVndA"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `100vh`}} />}
+          mapElement={<div style={{ height: `100%` }} />}
+          />
+          )}
+          {this.state.error && (
+            <div style={{ textAlign: "center" }}>
+              <h1>Error loading map</h1>
+              <p>Network error. Check internet connection.</p>
+            </div>
+          )}
+        </div>
+
+          // <MyMapComponent
+          // {...this.props}
+          // className="map"
+          // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDuDk-Kii8G-EwKiU54qniCYki40kqVndA" //A
+          // loadingElement={<div style={{ height: `100%` }} />}
+          // containerElement={<div style={{ height: `100%`, width: `75%` }} />}
+          // mapElement={<div style={{ height: `100%` }} />}
+          // />
       )
     }
   }

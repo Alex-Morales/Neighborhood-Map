@@ -18,7 +18,8 @@ class App extends Component {
       zoom: 12,
       updateSuperState: obj => {
         this.setState(obj);
-      }
+      },
+      error: false,
     };
   }
   closeMarkers = () =>  {
@@ -72,9 +73,18 @@ class App extends Component {
         this.setState({ venues, center, markers });
         console.log(results)
         console.log({ markers })
+    }).catch(error => {
+      this.setState({ error: true })
     });
   }
+
   render() {
+    if(this.state.error) {
+      return <div style={{ textAlign: "center" }}>
+        <h1>Error loading app</h1>
+        <p>Please try again.</p>
+      </div>;
+    }
     return (
       <div>
         <header>

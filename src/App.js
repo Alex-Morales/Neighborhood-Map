@@ -4,6 +4,7 @@ import './App.css';
 import Map from "./component/Map"
 import FoursquareAPI from "./API/"
 import SideBar from "./component/SideBar"
+import DrawerToggleButton from "./component/DrawerToggleButton"
 
 class App extends Component {
   constructor() {
@@ -89,7 +90,10 @@ class App extends Component {
       <div>
         <header>
           <nav>
-            <h1 aria-label="Home">Coffee shops in Folsom, CA</h1>
+            <div>
+              <DrawerToggleButton />
+            </div>
+            <div><h1 aria-label="Home">Coffee shops in Folsom, CA</h1></div>
           </nav>
         </header>
         <main className="App">

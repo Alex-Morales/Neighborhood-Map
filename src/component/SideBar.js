@@ -11,6 +11,7 @@ export default class SideBar extends Component {
       venues: [],
     }
   }
+  
   hideSbux = () => {
     const checkbox=document.getElementById('myCheck')
     if(checkbox.checked === true) {
@@ -66,14 +67,14 @@ export default class SideBar extends Component {
           onChange={this.inputChange}
           aria-label="Filter venues search bar"
         />
-        
-          Click to hide ALL Starbucks
+
+          {/*Click to hide ALL Starbucks
           <input
             type={"checkbox"}
             id={"myCheck"}
             onClick={this.hideSbux}
             aria-label="Hide starbucks checkbox"
-          />
+          />*/}
       </form>
 
         <VenueList {...this.props}

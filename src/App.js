@@ -4,7 +4,8 @@ import './App.css';
 import Map from "./component/Map"
 import FoursquareAPI from "./API/"
 import SideBar from "./component/SideBar"
-import DrawerToggleButton from "./component/DrawerToggleButton"
+import Toolbar from "./component/Toolbar"
+import Backdrop from "./component/Backdrop"
 
 class App extends Component {
   constructor() {
@@ -21,6 +22,7 @@ class App extends Component {
         this.setState(obj);
       },
       error: false,
+      sideDrawerOpen: false,
     };
   }
   closeMarkers = () =>  {
@@ -49,7 +51,16 @@ class App extends Component {
     const marker = this.state.markers.find(marker => marker.id === venue.id);
     console.log(marker);
     this.handleMarkerClick(marker);
+    this.setState({sideDrawerOpen: false});
   }
+  drawerToggleClickHandler = () => {
+    this.setState((prevState) => {
+      return {sideDrawerOpen: !prevState.sideDrawerOpen};
+    });
+  };
+  backdropClickHandler = () => {
+    this.setState({sideDrawerOpen: false});
+  };
 
   componentDidMount() {
     FoursquareAPI.search({
@@ -80,6 +91,14 @@ class App extends Component {
   }
 
   render() {
+    let sideDrawer;
+    let backdrop;
+    if(this.state.sideDrawerOpen) {
+      backdrop = <Backdrop click={this.backdropClickHandler} />
+      sideDrawer = <SideBar {...this.state}
+        handleListItemClick={this.handleListItemClick}
+      />
+    }
     if(this.state.error) {
       return <div style={{ textAlign: "center" }}>
         <h1>Error loading app</h1>
@@ -87,21 +106,16 @@ class App extends Component {
       </div>;
     }
     return (
-      <div>
-        <header>
-          <nav>
-            <div>
-              <DrawerToggleButton />
-            </div>
-            <div><h1 aria-label="Home">Coffee shops in Folsom, CA</h1></div>
-          </nav>
-        </header>
-        <main className="App">
-          <SideBar {...this.state}
+      <div style={{height: '100%'}}>
+        <Toolbar drawerClickHandler={this.drawerToggleClickHandler} />
+        {sideDrawer}
+        {backdrop}
+        <main className="App" style={{marginTop:'80px'}}>
+          {/*<SideBar {...this.state}
           handleListItemClick={this.handleListItemClick}
-          />
+          />*/}
           <Map {...this.state}
-          handleMarkerClick={this.handleMarkerClick}
+            handleMarkerClick={this.handleMarkerClick}
           />
         </main>
       </div>
